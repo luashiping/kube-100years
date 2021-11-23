@@ -1,3 +1,4 @@
+[![Go](https://github.com/cuisongliu/kube-100years/actions/workflows/go.yml/badge.svg)](https://github.com/cuisongliu/kube-100years/actions/workflows/go.yml)
 ### build kubernetes binary and fix 100 years cert
 
 ```
