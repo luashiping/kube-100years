@@ -14,3 +14,9 @@ Flags:
       --version string       kubernetes branch or tag (default "master")
 
 ```
+
+
+Dependents:
+
+- docker
+- git
