@@ -44,6 +44,7 @@ var rootCmd = &cobra.Command{
 			b.K8s100y()
 		} else {
 			logger.Warn("User cancel build 100years cert kubernetes.")
+			cmd.Help()
 		}
 	},
 }
