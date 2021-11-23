@@ -4,11 +4,12 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"github.com/fanux/sealos/pkg/logger"
 	"os"
 	"os/exec"
 	"strings"
 	"syscall"
+
+	"github.com/fanux/sealos/pkg/logger"
 )
 
 func S(v interface{}, args ...interface{}) string {

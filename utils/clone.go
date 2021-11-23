@@ -2,13 +2,14 @@ package utils
 
 import (
 	"fmt"
-	"github.com/fanux/sealos/pkg/logger"
 	"strings"
+
+	"github.com/fanux/sealos/pkg/logger"
 )
 
 func Clone(pwd, gitUrl, version string) {
 	logger.Info("当前执行阶段是: Branch克隆外部代码")
-	cloneShell := `cd %s && git clone %s && \
+	cloneShell := `cd %s && git clone %s  Kubernetes && \
 cd %s && git checkout %s`
 	dir := PathToFileName(gitUrl)
 	dir = strings.ReplaceAll(dir, ".git", "")
