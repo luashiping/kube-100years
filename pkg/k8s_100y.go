@@ -1,3 +1,19 @@
+/*
+Copyright © 2021 cuisongliu@qq.com
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 package pkg
 
 import (
@@ -57,10 +73,10 @@ bash -c /go/src/k8s.io/kubernetes/hotfix_100years.sh`
 		logger.Fatal("执行build shell报错: %s", err.Error())
 	}
 	//
-	finalFmt := `cp _output/local/bin/linux/amd64/kubeadm .
+	finalFmt := `cp _output/local/bin/%s/kubeadm .
 cp _output/local/bin/%s/kubelet .
 cp _output/local/bin/%s/kubectl .`
-	finalShell := fmt.Sprintf(finalFmt, v.Platform, v.Platform)
+	finalShell := fmt.Sprintf(finalFmt, v.Platform, v.Platform, v.Platform)
 	if err := utils2.ExecForPipe("/bin/bash", "-c", fmt.Sprintf("cd %s/%s && %s", v.Pwd, "kubernetes", finalShell)); err != nil {
 		logger.Fatal("执行copy shell报错: %s", err.Error())
 	}
