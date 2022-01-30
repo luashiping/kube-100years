@@ -34,7 +34,7 @@ type Version struct {
 }
 
 func (v *Version) K8s100y() { //1.clone code
-	utils2.Clone(v.Pwd, "https://gitee.com/mirrors/Kubernetes.git", v.K8sVersion)
+	utils2.Clone(v.Pwd, v.MirrorRepo, v.K8sVersion)
 	if err := utils2.ExecForPipe("/bin/bash", "-c", fmt.Sprintf("cd %s && mv %s %s", v.Pwd, "Kubernetes", "kubernetes")); err != nil {
 		logger.Fatal("执行mv shell报错: %s", err.Error())
 	}
