@@ -1,0 +1,2 @@
+6df8e43c88de2569f5ef0b2a4530bb4afdd0e62f697fb2dcb75befbcfad357f5  kube-100years_v0.0.0-next_linux_arm64.tar.gz
+fd7166aea7c4999b0ec82e246a8fba3c714cd63cd35328e072adee3e2d7f459d  kube-100years_v0.0.0-next_linux_amd64.tar.gz
