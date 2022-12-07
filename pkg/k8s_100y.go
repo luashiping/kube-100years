@@ -19,6 +19,7 @@ package pkg
 import (
 	"fmt"
 
+	"github.com/cuisongliu/kube-100years/utils"
 	utils2 "github.com/cuisongliu/kube-100years/utils"
 	"github.com/fanux/sealos/pkg/logger"
 )
@@ -39,12 +40,25 @@ func (v *Version) K8s100y() { //1.clone code
 		logger.Fatal("执行mv shell报错: %s", err.Error())
 	}
 	//2.sed shell
-	sedShell := `sed -i "s#CertificateValidity.*#CertificateValidity = time.Hour * 24 * 365 * 100#g"  cmd/kubeadm/app/constants/constants.go
+	switch utils.GetSystemOS() {
+	case "linux":
+		sedShell := `sed -i "s#CertificateValidity.*#CertificateValidity = time.Hour * 24 * 365 * 100#g"  cmd/kubeadm/app/constants/constants.go
 sed -i "s#now.Add.*#now.Add(duration365d * 100).UTC(),#g"  staging/src/k8s.io/client-go/util/cert/cert.go
 sed -i "s#maxAge :=.*#maxAge :=time.Hour * 24 * 365 * 100#g"  staging/src/k8s.io/client-go/util/cert/cert.go
 `
-	if err := utils2.ExecForPipe("/bin/bash", "-c", fmt.Sprintf("cd %s/%s && %s", v.Pwd, "kubernetes", sedShell)); err != nil {
-		logger.Fatal("执行sed shell报错: %s", err.Error())
+		if err := utils2.ExecForPipe("/bin/bash", "-c", fmt.Sprintf("cd %s/%s && %s", v.Pwd, "kubernetes", sedShell)); err != nil {
+			logger.Fatal("执行sed shell报错: %s", err.Error())
+		}
+	case "darwin":
+		sedShell := `sed -i ".original" "s#CertificateValidity.*#CertificateValidity = time.Hour * 24 * 365 * 100#g"  cmd/kubeadm/app/constants/constants.go
+sed -i ".original" "s#now.Add.*#now.Add(duration365d * 100).UTC(),#g"  staging/src/k8s.io/client-go/util/cert/cert.go
+sed -i ".original" "s#maxAge :=.*#maxAge :=time.Hour * 24 * 365 * 100#g"  staging/src/k8s.io/client-go/util/cert/cert.go
+`
+		if err := utils2.ExecForPipe("/bin/bash", "-c", fmt.Sprintf("cd %s/%s && %s", v.Pwd, "kubernetes", sedShell)); err != nil {
+			logger.Fatal("执行sed shell报错: %s", err.Error())
+		}
+	default:
+		logger.Fatal("dddd")
 	}
 
 	//3.
