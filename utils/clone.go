@@ -32,7 +32,7 @@ func Clone(pwd, gitUrl, version string) {
 	_, err := os.Stat(clonePath)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			cloneShell := `cd %s && git clone %s  Kubernetes && \
+			cloneShell := `cd %s && git clone %s kubernetes && \
 			cd %s && git checkout %s`
 			dir := PathToFileName(gitUrl)
 			dir = strings.ReplaceAll(dir, ".git", "")
