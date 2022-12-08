@@ -36,9 +36,9 @@ type Version struct {
 
 func (v *Version) K8s100y() { //1.clone code
 	utils2.Clone(v.Pwd, v.MirrorRepo, v.K8sVersion)
-	if err := utils2.ExecForPipe("/bin/bash", "-c", fmt.Sprintf("cd %s && mv %s %s", v.Pwd, "Kubernetes", "kubernetes")); err != nil {
-		logger.Fatal("执行mv shell报错: %s", err.Error())
-	}
+	// if err := utils2.ExecForPipe("/bin/bash", "-c", fmt.Sprintf("cd %s && mv %s %s", v.Pwd, "Kubernetes", "kubernetes")); err != nil {
+	// 	logger.Fatal("执行mv shell报错: %s", err.Error())
+	// }
 	//2.sed shell
 	switch utils.GetSystemOS() {
 	case "linux":
@@ -58,7 +58,7 @@ sed -i ".original" "s#maxAge :=.*#maxAge :=time.Hour * 24 * 365 * 100#g"  stagin
 			logger.Fatal("执行sed shell报错: %s", err.Error())
 		}
 	default:
-		logger.Fatal("dddd")
+		logger.Fatal("无效的平台")
 	}
 
 	//3.
